@@ -1,0 +1,10 @@
+language: generic 
+sudo: required #Hey travis we need super user level permissions
+services:    #telling travis we need docker cli preinstalled. Travis install docker cli in the container
+  - docker
+
+before_install:
+  - docker build -t georgiborisov/Docker-React -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true georgiborisov/Docker-React npm run test
